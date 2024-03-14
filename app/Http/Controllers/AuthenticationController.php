@@ -32,6 +32,11 @@ class AuthenticationController extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
+        if ($request) {
+            return response()->json(['message' => 'Berhasil Logout'], 200);
+        } else {
+            return response()->json(['message' => 'data not found'], 404);
+        }
     }
 
     public function me(Request $request)
