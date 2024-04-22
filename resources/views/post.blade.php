@@ -26,7 +26,7 @@
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="whats-news-single mb-40 mb-40">
                                                 @foreach ($posts as $post)
-                                                <img src="{{ url('storage/app/image/'.$post->image) }}" alt="" width="100">
+                                                <img src="{{ asset('storage/'.$post->image) }}" alt="" width="100">
                                                 {{-- <div class="whates-img">
                                                 </div> --}}
                                                 <div class="whates-caption">

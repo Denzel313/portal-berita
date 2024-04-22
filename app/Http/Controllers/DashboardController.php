@@ -13,9 +13,8 @@ class DashboardController extends Controller
     public function index()
     {
         $posts = Post::with('writer:id,username', 'comments:id,post_id,user_id,comments_content')->paginate(1);
-        $new_posts = Post::with('writer:id,username')->paginate(4);
         $most_popular = Post::with('writer:id,username', 'comments:id,post_id,user_id,comments_content')->paginate(4);
-        return view('dashboard.dashboard', compact('posts', 'new_posts', 'most_popular'));
+        return view('dashboard.dashboard', compact('posts', 'most_popular'));
     }
 
     /**
@@ -40,10 +39,11 @@ class DashboardController extends Controller
     public function show(string $id)
     {
         //get post by ID
-        $post = Post::with('writer:id,username')->findOrFail($id);
+        $posts = Post::with('writer:id,username', 'comments:id,post_id,user_id,comments_content')->findOrFail($id);
+        $most_popular = Post::with('writer:id,username', 'comments:id,post_id,user_id,comments_content')->paginate(3);
 
         //render view with post
-        return view('post', compact('post'));
+        return view('dashboard.detail_posts', compact('posts', 'most_popular'));
     }
 
     /**

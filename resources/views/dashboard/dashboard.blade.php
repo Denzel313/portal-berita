@@ -1,6 +1,67 @@
 @extends('layout.main')
 
 @section('content')
+
+<div class="trending-area fix pt-25 gray-bg">
+    <div class="container">
+        <div class="trending-main">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Trending Top -->
+                    <div class="slider-active">
+                        <!-- Single -->
+                        @foreach ($most_popular as $popular)
+                        <div class="single-slider">
+                            <div class="trending-top mb-30">
+                                <div class="trend-top-img">
+                                    <img src="{{ asset('storage/'.$popular->image) }}" alt="">
+                                    <div class="trend-top-cap">
+                                        <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">Business</span>
+                                        <h2><a href="{{ route('show.blog',['id' => $popular->id]) }}" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ Str::words($popular->title, 7, '.') }}</a></h2>
+                                        <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by {{ $popular->writer->username }} - {{ $popular->created_at->isoFormat('D MMMM Y') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- Right content -->
+                <div class="col-lg-4">
+                    <!-- Trending Top -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-sm-6">
+                            <div class="trending-top mb-30">
+                                <div class="trend-top-img">
+                                    <img src="{{ asset('style/assets/img/trending/trending_top3.jpg') }}" alt="">
+                                    <div class="trend-top-cap trend-top-cap2">
+                                        <span class="bgb">FASHION</span>
+                                        <h2><a href="latest_news.html">Secretart for Economic Air
+                                                plane that looks like</a></h2>
+                                        <p>by Alice cloe - Jun 19, 2020</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-sm-6">
+                            <div class="trending-top mb-30">
+                                <div class="trend-top-img">
+                                    <img src="{{ asset('style/assets/img/trending/trending_top4.jpg') }}" alt="">
+                                    <div class="trend-top-cap trend-top-cap2">
+                                        <span class="bgg">TECH </span>
+                                        <h2><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h2>
+                                        <p>by Alice cloe - Jun 19, 2020</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="whats-news-area pt-50 pb-20 gray-bg">
     <div class="container">
         <div class="row">
@@ -26,7 +87,7 @@
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="whats-news-single mb-40 mb-40">
                                                 @foreach ($posts as $post)
-                                                <img src="{{ url('storage/app/image/'.$post->image) }}" alt="" width="100">
+                                                <img src="{{ asset('storage/'.$post->image) }}" alt="" width="300">
                                                 {{-- <div class="whates-img">
                                                 </div> --}}
                                                 <div class="whates-caption">
@@ -40,17 +101,16 @@
                                         <!-- Right single caption -->
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="row">
-                                                <!-- single -->
-                                                @foreach ($new_posts as $newPost)
+                                                @foreach ($most_popular as $popular)
                                                 <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
                                                     <div class="whats-right-single mb-20">
                                                         <div class="whats-right-img">
-                                                            <img src="{{ asset('style/assets/img/gallery/whats_right_img1.png') }}" alt="">
+                                                            <img src="{{ asset('storage/'.$popular->image) }}" alt="" width="100">
                                                         </div>
                                                         <div class="whats-right-cap">
-                                                            <span class="colorb">{{ $post->title }}</span>
-                                                            <h4><a href="latest_news.html">{{ Str::words($post->news_content, 6, '.') }}</a></h4>
-                                                            <p>{{ $post->created_at->isoFormat('dddd, D MMMM Y') }}</p>
+                                                            <span class="colorb">{{ $popular->title }}</span>
+                                                            <h4><a href="{{ route('post',['id' => $post->id]) }}">{{ Str::words($popular->news_content, 6, '.') }}</a></h4>
+                                                            <p>{{ $popular->created_at->isoFormat('dddd, D MMMM Y') }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,7 +199,7 @@
                                     <!-- Single -->
                                     <div class="weekly2-single">
                                         <div class="weekly2-img">
-                                            <img src="{{ asset('style/assets/img/gallery/weeklyNews1.png') }}" alt="">
+                                            <img src="{{ asset('storage/'.$popular->image) }}" alt="">
                                             {{-- <img src="{{ url('storage/app/image/'.$post->image) }}" alt=""> --}}
                                         </div>
                                         <div class="weekly2-caption">

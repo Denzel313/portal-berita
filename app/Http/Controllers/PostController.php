@@ -44,9 +44,11 @@ class PostController extends Controller
             //di sini kita upload file nya
             $fileName = $this->generateRandomString();
             $extension =  $request->file->extension();
-            $image = $fileName.'.'.$extension;
+            $image = 'posts-image/' . $fileName . '.' . $extension;
+            // $path = 'posts-image/' . $image;
 
-            Storage::putFileAs('image', $request->file, $image);
+            Storage::putFileAs('public', $request->file, $image);
+            // Storage::disk('public')->put($path,file_get_contents($image));
         }
 
         $request['image'] = $image;

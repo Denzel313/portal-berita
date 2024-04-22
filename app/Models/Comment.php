@@ -26,4 +26,14 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    // /**
+    //  * Get the postingan that owns the Comment
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function postingan(): BelongsTo
+    // {
+    //     return $this->belongsTo(Post::class, 'post_id', 'id');
+    // }
 }

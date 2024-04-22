@@ -9,7 +9,7 @@
                     @foreach ($posts as $post)
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="{{ asset('style/assets/img/blog/single_blog_1.png') }}" alt="">
+                            <img class="card-img rounded-0" src="{{ asset('storage/'.$post->image) }}" alt="">
                             <a href="#" class="blog_item_date">
                                 <h3>{{ $post->created_at->isoFormat('D') }}</h3>
                                 <p>{{ $post->created_at->isoFormat(' MMM') }}</p>
@@ -17,18 +17,20 @@
                         </div>
 
                         <div class="blog_details">
-                            <a class="d-inline-block" href="single-blog.html">
+                            <a class="d-inline-block" href="{{ route('show.blog',['id' => $post->id]) }}">
                                 <h2>{{ $post->title }}</h2>
                             </a>
                             <p>{!! Str::words($post->news_content, 15, '.') !!}</p>
                             <ul class="blog-info-link">
                                 <li><a href="#"><i class="fa fa-user"></i> {{ $post->writer->username }}, Category</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> {{ $counts = DB::table('comments')->count(); }}</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> {{ $counts }}</a></li>
                             </ul>
                         </div>
                     </article>
                     @endforeach
-
+                    <div class="d-flex justify-content-center">
+                        {!! $posts->links() !!}
+                    </div>
                     {{-- <nav class="blog-pagination justify-content-center d-flex">
                         <ul class="pagination">
                             <li class="page-item">
@@ -54,10 +56,11 @@
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
                     <aside class="single_sidebar_widget search_widget">
-                        <form action="#">
+                        <form action="{{ route('blog.search') }}" method="GET">
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                                    {{-- <input type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" value="{{ $request->get('search') }}"> --}}
+                                    <input type="text" class="form-control" name="search" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
                                     <div class="input-group-append">
                                         <button class="btns" type="button"><i class="ti-search"></i></button>
                                     </div>

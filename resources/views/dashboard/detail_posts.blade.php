@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="{{ asset('style/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/style.css') }}">
-    @yield('css')
 </head>
 
 <body>
@@ -37,7 +36,7 @@
             </div>
         </div>
     </div>
-    <!-- Preloader Start-->
+    <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
         <div class="header-area">
@@ -80,6 +79,10 @@
                                     <ul class="header-social">
                                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                     </ul>
+                                    <!-- Search Nav -->
+                                    <div class="nav-search search-switch">
+                                        <i class="fa fa-search"></i>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Mobile Menu -->
@@ -93,9 +96,80 @@
         </div>
         <!-- Header End -->
     </header>
-    <!--================Blog Area =================-->
-    @yield('content')
-    <!--================Blog Area =================-->
+    <main>
+        <!-- About US Start -->
+        <div class="about-area2 gray-bg pt-60 pb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Trending Tittle -->
+                        <div class="about-right mb-90">
+                            <div class="about-img">
+                                <img src="{{ asset('storage/'.$posts->image) }}" alt="">
+                            </div>
+                            <div class="heading-news mb-30 pt-30">
+                                <h3>{{ $posts->title }}</h3>
+                            </div>
+                            <div class="about-prea">
+                                <p class="about-pera1 mb-25">{{ $posts->news_content }}</p>
+                            </div>
+                            <div class="social-share pt-30">
+                                <div class="section-tittle">
+                                    <h3 class="mr-20">Share:</h3>
+                                    <ul>
+                                        <li><a href="#"><img src="assets/img/news/icon-ins.png" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('style/assets/img/news/icon-fb.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('style/assets/img/news/icon-tw.png') }}" alt=""></a></li>
+                                        <li><a href="#"><img src="{{ asset('style/assets/img/news/icon-yo.png') }}" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- From -->
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <form class="form-contact contact_form mb-80" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control error" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control error" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <input class="form-control error" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="button button-contactForm boxed-btn boxed-btn2">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Flow Socail -->
+                        <!-- New Poster -->
+                        <div class="news-poster d-none d-lg-block">
+                            <img src="{{ asset('style/assets/img/news/news_card.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About US End -->
+    </main>
     <footer>
         <!-- Footer Start-->
         <div class="footer-main footer-bg">
@@ -125,35 +199,17 @@
                                     <h4>Popular post</h4>
                                 </div>
                                 <!-- Popular post -->
+                                @foreach ($most_popular as $popular)
                                 <div class="whats-right-single mb-20">
                                     <div class="whats-right-img">
-                                        <img src="{{ asset('style/assets/img/gallery/footer_post1.png') }}" alt="">
+                                        <img src="{{ asset('storage/'.$popular->image) }}" alt="" width="100">
                                     </div>
                                     <div class="whats-right-cap">
-                                        <h4><a href="details.html">Scarlett’s disappointment at latest accolade</a></h4>
-                                        <p>Jhon | 2 hours ago</p>
+                                        <h4><a href="details.html">{{ $popular->title }}</a></h4>
+                                        <p>{{ $popular->writer->username }} | {{ $popular->created_at->diffForHumans() }}</p>
                                     </div>
                                 </div>
-                                <!-- Popular post -->
-                                <div class="whats-right-single mb-20">
-                                    <div class="whats-right-img">
-                                        <img src="{{ asset('style/assets/img/gallery/footer_post2.png') }}" alt="">
-                                    </div>
-                                    <div class="whats-right-cap">
-                                        <h4><a href="details.html">Scarlett’s disappointment at latest accolade</a></h4>
-                                        <p>Jhon | 2 hours ago</p>
-                                    </div>
-                                </div>
-                                <!-- Popular post -->
-                                <div class="whats-right-single mb-20">
-                                    <div class="whats-right-img">
-                                        <img src="{{ asset('style/assets/img/gallery/footer_post3.png') }}" alt="">
-                                    </div>
-                                    <div class="whats-right-cap">
-                                        <h4><a href="details.html">Scarlett’s disappointment at latest accolade</a></h4>
-                                        <p>Jhon | 2 hours ago</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
@@ -167,16 +223,6 @@
                 </div>
             </div>
             <!-- footer-bottom aera -->
-            <div class="footer-bottom-area footer-bg">
-                <div class="container">
-                    <div class="footer-border">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-xl-12 ">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- Footer End-->
     </footer>
@@ -195,7 +241,7 @@
 
     <script src="{{ asset('style/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="{{ asset('style/assets/js/vendor/jquery-1.12.4.min.js') }} "></script>
+    <script src="{{ asset('style/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/bootstrap.min.js') }}"></script>
     <!-- Jquery Mobile Menu -->
@@ -204,16 +250,17 @@
     <!-- Jquery Slick , Owl-Carousel Plugins -->
     <script src="{{ asset('style/assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/slick.min.js') }}"></script>
-
+    <!-- Date Picker -->
+    <script src="{{ asset('style/assets/js/gijgo.min.js') }}"></script>
     <!-- One Page, Animated-HeadLin -->
     <script src="{{ asset('style/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/animated.headline.js') }}"></script>
+    <script src="{{ asset('style/assets/js/jquery.magnific-popup.js') }}"></script>
 
     <!-- Scrollup, nice-select, sticky -->
     <script src="{{ asset('style/assets/js/jquery.scrollUp.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/jquery.sticky.js') }}"></script>
-    <script src="{{ asset('style/assets/js/jquery.magnific-popup.js') }}"></script>
 
     <!-- contact js -->
     <script src="{{ asset('style/assets/js/contact.js') }}"></script>
@@ -226,6 +273,5 @@
     <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('style/assets/js/main.js') }}"></script>
 
-    @yield('scripts')
 </body>
 </html>

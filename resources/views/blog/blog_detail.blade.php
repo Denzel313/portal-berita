@@ -107,50 +107,37 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 posts-list">
+                        {{-- @foreach ($posts as $post) --}}
                         <div class="single-post">
                             <div class="feature-img">
-                                <img class="img-fluid" src="{{ asset('style/assets/img/blog/single_blog_1.png') }}" alt="">
+                                <img class="card-img rounded-0" src="{{ asset('storage/'.$posts->image) }}" alt="">
                             </div>
                             <div class="blog_details">
-                                <h2>Second divided from form fish beast made every of seas
-                                    all gathered us saying he our
-                                </h2>
+                                <h2>{{ $posts->title }}</h2>
                                 <ul class="blog-info-link mt-3 mb-4">
                                     <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i> {{ $count }} Comments</a></li>
                                 </ul>
                                 <p class="excert">
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                    fraction of the camp price. However, who has the willpower
+                                    {{ Str::words($posts->news_content, 100, '.') }}
                                 </p>
                                 <p>
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                    fraction of the camp price. However, who has the willpower to actually sit through a
-                                    self-imposed MCSE training. who has the willpower to actually
+                                    {{ Str::words($posts->news_content, 100, '.') }}
                                 </p>
                                 <div class="quote-wrapper">
                                     <div class="quotes">
-                                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                        should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                                        a fraction of the camp price. However, who has the willpower to actually sit through a
-                                        self-imposed MCSE training.
+                                        {{ Str::words($posts->news_content, 100, '.') }}
                                     </div>
                                 </div>
                                 <p>
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                    fraction of the camp price. However, who has the willpower
+                                    {{ Str::words($posts->news_content, 100, '.') }}
                                 </p>
                                 <p>
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                                    should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                                    fraction of the camp price. However, who has the willpower to actually sit through a
-                                    self-imposed MCSE training. who has the willpower to actually
+                                    {{ Str::words($posts->news_content, 100, '.') }}
                                 </p>
                             </div>
                         </div>
+                        {{-- @endforeach --}}
                         <div class="navigation-top">
                             <div class="d-sm-flex justify-content-between text-center">
                                 <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
@@ -161,8 +148,8 @@
                                 <ul class="social-icons">
                                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -171,15 +158,16 @@
                                 <img src="{{ asset('style/assets/img/blog/author.png') }}" alt="">
                                 <div class="media-body">
                                     <a href="#">
-                                        <h4>Harvard milan</h4>
+                                        <h4>{{ $posts->writer->username }}</h4>
                                     </a>
-                                    <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
-                                        our dominion twon Second divided from</p>
+                                    <p>{{ Str::words($posts->news_content, 20, '.') }}</p>
                                 </div>
                             </div>
                         </div>
+                        @if($count > 0)
                         <div class="comments-area">
-                            <h4>05 Comments</h4>
+                            <h4>{{ $count }} Comments</h4>
+                            @foreach ($comments as $comment)
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">
                                     <div class="user justify-content-between d-flex">
@@ -188,15 +176,14 @@
                                         </div>
                                         <div class="desc">
                                             <p class="comment">
-                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                {{ $comment->comments_content }}
                                             </p>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <h5>
-                                                        <a href="#">Emilly Blunt</a>
+                                                        <a href="#">{{ $comment->commentator->username }}</a>
                                                     </h5>
-                                                    <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                    <p class="date" {{ $comment->created_at }}> </p>
                                                 </div>
                                                 <div class="reply-btn">
                                                     <a href="#" class="btn-reply text-uppercase">reply</a>
@@ -206,81 +193,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment-list">
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <img src="{{ asset('style/assets/img/comment/comment_2.png') }}" alt="">
-                                        </div>
-                                        <div class="desc">
-                                            <p class="comment">
-                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                            </p>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <h5>
-                                                        <a href="#">Emilly Blunt</a>
-                                                    </h5>
-                                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                </div>
-                                                <div class="reply-btn">
-                                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment-list">
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <img src="{{ asset('style/assets/img/comment/comment_3.png') }}" alt="">
-                                        </div>
-                                        <div class="desc">
-                                            <p class="comment">
-                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                            </p>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <h5>
-                                                        <a href="#">Emilly Blunt</a>
-                                                    </h5>
-                                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                </div>
-                                                <div class="reply-btn">
-                                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
+                        @endif
                         <div class="comment-form">
                             <h4>Leave a Reply</h4>
-                            <form class="form-contact comment_form" action="#" id="commentForm">
+                            <form class="form-contact comment_form" action="{{ route('store.comment') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                            <textarea class="form-control w-100" name="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                            @error('comment')
+                                            <small>{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                            <input class="form-control" name="name" type="text" placeholder="Name" value="{{ $posts->writer->username }}">
                                         </div>
                                     </div>
                                 </div>
@@ -292,19 +223,6 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                                            <div class="input-group-append">
-                                                <button class="btns" type="button"><i class="ti-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">Search</button>
-                                </form>
-                            </aside>
                             <aside class="single_sidebar_widget post_category_widget">
                                 <h4 class="widget_title">Category</h4>
                                 <ul class="list cat-list">
